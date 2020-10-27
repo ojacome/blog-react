@@ -15,7 +15,9 @@ function App() {
     <div className="App">
       <Header />
 
-      <Slider />
+      <Slider 
+      titulo="Bienvenido al Curso de React con Víctor Robles"
+      />
 
       <div className="center">        
 
