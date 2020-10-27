@@ -5,6 +5,34 @@ import Peliculas from './Peliculas'
 
 class SeccionPruebas extends Component {
 
+    contador = 0;
+
+    state = {
+        contador: 0
+    };
+    
+    //Segunda forma de declarar el state
+    // constructor(props){
+    //     super(props);
+
+    //     this.state = {
+    //         contador: 0
+    //     };
+    // }
+
+
+    sumar(){
+        this.setState({
+            contador: (this.state.contador + 1)
+        });
+    }
+
+    restar(){
+        this.setState({
+            contador: (this.state.contador - 1)
+        });
+    }
+
     HolaMundo(nombre, edad) {
         var presentacion = (
           <div>
@@ -32,6 +60,11 @@ class SeccionPruebas extends Component {
                     <Peliculas />
                 </section>
 
+                <h2>Estado</h2>
+                <hr></hr>
+                <p>Contador: { this.state.contador}</p>
+                <input type="button" onClick={this.sumar.bind(this)} value="Sumar"/>
+                <input type="button" onClick={this.restar.bind(this)} value="Restar"/>
             </section>
         );
     }
