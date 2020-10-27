@@ -4,6 +4,7 @@ import Slider from './components/Slider'
 import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
 import Peliculas from './components/Peliculas';
+import Router from './Router';
 
 
 
@@ -21,7 +22,8 @@ function App() {
 
       <div className="center">        
 
-        <Peliculas/>
+        <Router/>
+        {/* <Peliculas/> */}
 
         <Sidebar/>
         <div className="clearfix"></div>

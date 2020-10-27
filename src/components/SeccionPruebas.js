@@ -9,7 +9,7 @@ class SeccionPruebas extends Component {
     state = {
         contador: 0
     };
-    
+
     //Segunda forma de declarar el state
     // constructor(props){
     //     super(props);
@@ -34,21 +34,21 @@ class SeccionPruebas extends Component {
 
     HolaMundo(nombre, edad) {
         var presentacion = (
-          <div>
-            <h2>Hola, soy {nombre}</h2>
-            <h3> y tengo {edad} años</h3>
-          </div>
+            <div>
+                <h2>Hola, soy {nombre}</h2>
+                <h3> y tengo {edad} años</h3>
+            </div>
         )
-      
+
         return presentacion;
-      }
+    }
 
     render() {
         return (
 
             <section id="content">
 
-            <h2 className="subheader">Últimos artículos</h2>
+                <h2 className="subheader">Últimos artículos</h2>
                 <p>
                     HOLA BIENVENIDO AL CURSO DE VICTOR ROBLES
                 </p>
@@ -56,14 +56,14 @@ class SeccionPruebas extends Component {
 
                 <section className="componentes">
                     <MiComponente />
-                   
+
                 </section>
 
                 <h2>Estado</h2>
                 <hr></hr>
-                <p>Contador: { this.state.contador}</p>
-                <input type="button" onClick={this.sumar} value="Sumar"/>
-                <input type="button" onClick={this.restar} value="Restar"/>
+                <p>Contador: {this.state.contador}</p>
+                <input type="button" onClick={this.sumar} value="Sumar" />
+                <input type="button" onClick={this.restar} value="Restar" />
             </section>
         );
     }
