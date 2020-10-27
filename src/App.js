@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Slider from './components/Slider'
 import Sidebar from './components/Sidebar'
 import Footer from './components/Footer'
-import SeccionPruebas from './components/SeccionPruebas'
+import Peliculas from './components/Peliculas';
 
 
 
@@ -21,7 +21,7 @@ function App() {
 
       <div className="center">        
 
-        <SeccionPruebas/>
+        <Peliculas/>
 
         <Sidebar/>
         <div className="clearfix"></div>
