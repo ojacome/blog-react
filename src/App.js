@@ -1,9 +1,4 @@
 import './assets/css/App.css';
-import Header from './components/Header'
-import Slider from './components/Slider'
-import Sidebar from './components/Sidebar'
-import Footer from './components/Footer'
-import Peliculas from './components/Peliculas';
 import Router from './Router';
 
 
@@ -14,22 +9,13 @@ import Router from './Router';
 function App() {
   return (
     <div className="App">
-      <Header />
-
-      <Slider 
-      titulo="Bienvenido al Curso de React con Víctor Robles"
-      />
-
-      <div className="center">        
+            
+             
 
         <Router/>
         {/* <Peliculas/> */}
 
-        <Sidebar/>
-        <div className="clearfix"></div>
-      </div>
-
-      <Footer/>
+      
     </div>
     
   );
