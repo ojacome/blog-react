@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import Pelicula from './Pelicula';
+import Sidebar from './Sidebar';
+import Slider from './Slider';
 
 
 
@@ -55,39 +57,51 @@ class Peliculas extends Component {
 
 
         return (
-            <div id="content" className="peliculas">
-                <h2 className="subheader">Películas</h2>
-                <p>Películas favoritas de {this.state.nombre}</p>
-                <button onClick={this.cambiarTitulo}>Cambiar titulo pelicula 1</button>
-                
-                {/* condicional if else*/}
-                {/* {this.state.favorita.titulo ? (
-                        <p>
-                            <strong>La película preferida es: </strong>
-                            <span>{ this.state.favorita.titulo }</span>
-                        </p>
-                    ) : (
-                        <p>No hay película prefierida</p>
-                    )
-                } */}
+            <div >
+                <Slider 
+                    titulo="Películas"
+                    size="slider-small"
+                    />
 
-                {/* SEGUNDA FORMA   condicional */}
-                {favorita}
+                <div className="center"> 
+
+                    <div id="content" className="peliculas">                        
+                        <p>Películas favoritas de {this.state.nombre}</p>
+                        <button onClick={this.cambiarTitulo}>Cambiar titulo pelicula 1</button>
+                        
+                        {/* condicional if else*/}
+                        {/* {this.state.favorita.titulo ? (
+                                <p>
+                                    <strong>La película preferida es: </strong>
+                                    <span>{ this.state.favorita.titulo }</span>
+                                </p>
+                            ) : (
+                                <p>No hay película prefierida</p>
+                            )
+                        } */}
+
+                        {/* SEGUNDA FORMA   condicional */}
+                        {favorita}
 
 
-                
-                <div id="articles" className="peliculas">
-                {
-                    this.state.peliculas.map((pelicula, i) => {
-                        return (
-                            <Pelicula
-                            key={ i }
-                            pelicula={ pelicula }
-                            marcarFavorita= { this.favorita }
-                            />
-                        )
-                    })
-                }
+                        
+                        <div id="articles" className="peliculas">
+                        {
+                            this.state.peliculas.map((pelicula, i) => {
+                                return (
+                                    <Pelicula
+                                    key={ i }
+                                    pelicula={ pelicula }
+                                    marcarFavorita= { this.favorita }
+                                    />
+                                )
+                            })
+                        }
+                        </div>
+                    </div>
+                        <Sidebar
+                            blog="false"
+                        />
                 </div>
             </div>
         );

@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 import Sidebar from './Sidebar';
 import Slider from './Slider';
@@ -6,6 +7,9 @@ import Slider from './Slider';
 
 class Blog extends Component {
     render() {
+
+        
+
         return (
             <div id="blog">
 
