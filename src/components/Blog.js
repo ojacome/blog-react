@@ -1,14 +1,17 @@
-import Axios from 'axios';
+
 import React, { Component } from 'react';
+import Articles from './Articles';
 import Sidebar from './Sidebar';
 import Slider from './Slider';
 
 
 
 class Blog extends Component {
-    render() {
 
-        
+    
+
+
+    render() {
 
         return (
             <div id="blog">
@@ -21,6 +24,7 @@ class Blog extends Component {
                 <div className="center"> 
                     <div id="content">
                         {/* Listado de items      */}
+                        <Articles></Articles>
                     </div>
 
                     <Sidebar
