@@ -5,6 +5,7 @@ import Global from '../Global';
 import Moment from 'react-moment';
 import 'moment/locale/es';
 import ImageDefault from '../assets/images/no-img.png';
+import { Link } from 'react-router-dom';
 
 
 class Article extends Component {
@@ -63,8 +64,8 @@ class Article extends Component {
                                 { article.content }
                             </p>
 
-                            <a href="#" className="btn btn-danger">Eliminar</a>
-                            <a href="#" className="btn btn-warning">Editar</a>
+                            <Link to="/blog" className="btn btn-danger">Eliminar</Link>
+                            <Link to="/blog" className="btn btn-warning">Editar</Link>
 
                             <div className="clearfix"></div>
                         </article>

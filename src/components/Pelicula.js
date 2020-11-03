@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -24,7 +25,7 @@ class Pelicula extends Component {
                 <span className="date">
                     Hace 5 minutos
                 </span>
-                <a href="#">Leer más</a>
+                <Link to="/blog">Leer más</Link>
                 <button type="button" onClick={this.marcar}>
                     Marcar como fav
                 </button>

@@ -241,13 +241,18 @@ body {
 }
 
 input[type="text"],
-textarea{
+textarea,
+input[type="file"]{
   width: 100%;
   min-height: 30px;
   border: 1px solid #ccc;
   padding: 3px;
   margin-bottom: 5px;
   transition: 300ms all;
+}
+
+input[type="submit"]{
+  margin-top: 15px;
 }
 
 input[type="text"]:focus,
