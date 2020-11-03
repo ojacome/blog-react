@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import MiComponente from './components/MiComponente';
 import Peliculas from './components/Peliculas';
 import NoPage from './components/NoPage';
@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import Blog from './components/Blog';
 import Formulario from './components/Formulario';
+import Search from './components/Search';
+import Article from './components/Article';
 
 
 
@@ -22,12 +24,20 @@ class Router extends Component {
 
                 
                 <Switch>
-                    <Route exact path="/" component={ Home }/>
-                    <Route exact path="/blog" component={ Blog }/>
-                    <Route exact path="/home" component={ Home }/>
-                    <Route exact path="/formulario" component={ Formulario }/>
-                    <Route exact path="/peliculas" component={ Peliculas }/>
-                    <Route exact path="/segunda-ruta" component={MiComponente}/>
+                    <Route exact path="/"                       component={ Home }/>
+                    <Route exact path="/blog"                   component={ Blog }/>
+                    <Route exact path="/blog/articulo/:id"      component={ Article }/>
+                    <Route exact path="/blog/busqueda/:search"  component={ Search }/>
+                    <Route exact path="/home"                   component={ Home }/>
+                    <Route exact path="/formulario"             component={ Formulario }/>
+                    <Route exact path="/peliculas"              component={ Peliculas }/>
+                    <Route exact path="/segunda-ruta"           component={MiComponente}/>
+                    <Route exact path="/redirect/:search" render={ (props) => {
+                        var search = props.match.params.search
+                        return(
+                            <Redirect to={'/blog/busqueda/'+search}/>
+                        )
+                    }}/>
 
                     {/* 
                     Ruta con parámetros 

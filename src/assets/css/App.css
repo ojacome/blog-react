@@ -208,6 +208,24 @@ body {
   background:black;
 }
 
+.btn-danger{
+  background: rgb(243, 83, 83);
+  
+}
+
+.btn-danger:hover{
+  opacity: 0.8;
+}
+
+.btn-warning{
+  background: rgb(253, 223, 54);
+  
+}
+
+.btn-warning:hover{
+  opacity: 0.8;
+}
+
 .mid-form{
   width: 50%;
   margin: 0px auto;

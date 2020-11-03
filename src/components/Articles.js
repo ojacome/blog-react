@@ -4,7 +4,7 @@ import Global from '../Global';
 import ImageDefault from '../assets/images/no-img.png'
 import Moment from 'react-moment'
 import 'moment/locale/es'
-
+import { Link } from 'react-router-dom'
 
 
 class Articles extends Component {
@@ -17,7 +17,50 @@ class Articles extends Component {
     }
 
     componentWillMount(){
-        this.getArticles();
+        var home = this.props.home;
+        var search = this.props.search;
+
+        if( home === 'true' ){
+
+            this.getLastArticles();
+        }
+        else if( search && search != null && search != undefined ){
+            this.getArticlesBySearch( search );
+        }
+        else{
+
+            this.getArticles();
+        }
+    }
+
+    getArticlesBySearch = ( searched ) => {
+        Axios.get(`${this.url}/articles/search/${searched}`)
+        .then( res => {
+            
+            this.setState({
+                articles: res.data.articles,
+                status: 'success'
+            })
+            
+            console.log(this.state);
+        })
+        .catch( err => { 
+            this.setState({
+                articles: [],
+                status: 'success'
+            })
+        })
+    }
+
+    getLastArticles = () => {
+        Axios.get(`${this.url}/articles/last`)
+        .then( res => {
+            this.setState({
+                articles: res.data.articles,
+                status: 'success'
+            })
+            console.log(this.state);
+        })
     }
     
     getArticles = () => {
@@ -37,8 +80,8 @@ class Articles extends Component {
 
             var listArticles = this.state.articles.map( (article) => {
                 return(
-                    <article class="article-item" id="article-template">
-                        <div class="image-wrap">
+                    <article className="article-item" id="article-template">
+                        <div className="image-wrap">
                             {
                                 article.image !== null ? (
                                     <img src={this.url+'/get-image/'+article.image} alt={article.title} />
@@ -49,12 +92,12 @@ class Articles extends Component {
                         </div>
     
                         <h2>{article.title}</h2>
-                        <span class="date">
+                        <span className="date">
                             <Moment fromNow>{article.date}</Moment>
                         </span>
-                        <a href="#">Leer más</a>
+                        <Link to={'/blog/articulo/'+article._id}>Leer más</Link>
 
-                        <div class="clearfix"></div>
+                        <div className="clearfix"></div>
                     </article>
                 )
             })
@@ -68,14 +111,14 @@ class Articles extends Component {
         else if(this.state.articles.length === 0 && this.state.status === 'success' ){
             return (
                 <div id="articles">
-                    <h1 className="subheader">No hay articulos registrados</h1>
+                    <h1 className="subheader">No hay artículos registrados</h1>
                 </div>
             );
         }
         else{
             return (
                 <div id="articles">
-                    <h1 className="subheader">Cargando articulos...</h1>
+                    <h1 className="subheader">Cargando artículos...</h1>
                 </div>
             );
         }
