@@ -21,6 +21,7 @@ class Article extends Component {
         
         Axios.get(this.url + '/articles/article/' + id)
         .then( res => {
+            console.log(res.data)
             this.setState({
                 article: res.data.article,
                 status: 'success'
@@ -49,7 +50,7 @@ class Article extends Component {
                             <div className="image-wrap">
                             {
                                 article.image !== null ? (
-                                    <img src={this.url+'/get-image/'+article.image} alt={article.title} />
+                                    <img src={this.url+'/articles/get-image/'+article.image} alt={article.title} />
                                 ) : (
                                     <img src={ImageDefault} alt="imagen por defecto" />
                                 )

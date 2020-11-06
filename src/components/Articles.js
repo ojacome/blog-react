@@ -84,7 +84,7 @@ class Articles extends Component {
                         <div className="image-wrap">
                             {
                                 article.image !== null ? (
-                                    <img src={this.url+'/get-image/'+article.image} alt={article.title} />
+                                    <img src={this.url+'/articles/get-image/'+article.image} alt={article.title} />
                                 ) : (
                                     <img src={ImageDefault} alt="imagen por defecto" />
                                 )
