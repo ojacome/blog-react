@@ -3,6 +3,8 @@ import Axios from 'axios';
 import Sidebar from './Sidebar';
 import Global from '../Global';
 import { Redirect } from 'react-router-dom';
+import SimpleReactValidator from 'simple-react-validator';
+import Swal from 'sweetalert';
 
 
 
@@ -14,68 +16,93 @@ class CreateArticle extends Component {
 
     state = {
         article: {},
-        status: null, 
-        selectedFile: null       
+        status: null,
+        selectedFile: null
     }
-    
+
+    componentWillMount() {
+        this.validator = new SimpleReactValidator({
+            messages: {
+                required: 'Este campo es requerido.'
+            }
+        });
+    }
+
     saveArticle = (e) => {
         e.preventDefault();
 
         this.changeState();
 
-        
-        Axios.post(this.url+'/articles', this.state.article )
-        .then( resp => {
+        if (this.validator.allValid()) {
 
-            if( resp.data.article ){
+            Axios.post(this.url + '/articles', this.state.article)
+                .then(resp => {
 
-                this.setState({
-                    article: resp.data.article,
-                    status: 'waiting'
-                })
-                
-                //subir archivo
-                if(this.state.selectedFile !== null){
+                    if (resp.data.article) {
 
-                    var articleId = this.state.article._id;
+                        this.setState({
+                            article: resp.data.article,
+                            status: 'waiting'
+                        })
 
-                    const formData = new FormData();
-                    formData.append(
-                        'image',
-                        this.state.selectedFile,
-                        this.state.selectedFile.name
-                    );
+                        //subir archivo
+                        if (this.state.selectedFile !== null) {
 
-                    Axios.post(this.url + '/articles/upload-image/' + articleId, formData)
-                    .then( resp => {
+                            var articleId = this.state.article._id;
 
-                        console.log(resp.data);
-                        if(resp.data.article){
+                            const formData = new FormData();
+                            formData.append(
+                                'image',
+                                this.state.selectedFile,
+                                this.state.selectedFile.name
+                            );
+
+                            Axios.post(this.url + '/articles/upload-image/' + articleId, formData)
+                                .then(resp => {
+
+                                    console.log(resp.data);
+                                    if (resp.data.article) {
+
+                                        Swal(
+                                            'Artículo creado',
+                                            'El artículo ha sido creado correctamente',
+                                            'success'
+                                        )
+                                        
+                                        this.setState({
+                                            article: resp.data.article,
+                                            status: 'success'
+                                        })
+                                    }
+                                    else {
+                                        this.setState({
+                                            article: resp.data.article,
+                                            status: 'failed'
+                                        })
+                                    }
+                                })
+                        }
+                        else {
                             this.setState({
-                                article: resp.data.article,
                                 status: 'success'
                             })
                         }
-                        else{
-                            this.setState({
-                                article: resp.data.article,
-                                status: 'failed'
-                            })
-                        }
-                    })
-                }
-                else{
-                    this.setState({
-                        status: 'success'
-                    })
-                }
-            }
-            else{
-                this.setState({
-                    status: 'failed'
+                    }
+                    else {
+                        this.setState({
+                            status: 'failed'
+                        })
+                    }
                 })
-            }
-        })
+        }
+        else {
+            this.setState({
+                status: 'failed'
+            })
+
+            this.validator.showMessages();
+            this.forceUpdate()
+        }
     }
 
     //rellenar state 
@@ -86,10 +113,13 @@ class CreateArticle extends Component {
                 content: this.contentRef.current.value,
             }
         })
+
+        this.validator.showMessages();
+        this.forceUpdate()
         // console.log(this.state)
     }
 
-    fileChange = (event) => {        
+    fileChange = (event) => {
 
         this.setState({
             selectedFile: event.target.files[0]
@@ -99,7 +129,7 @@ class CreateArticle extends Component {
 
 
     render() {
-        if( this.state.status === 'success'){
+        if (this.state.status === 'success') {
             return <Redirect to="/blog"></Redirect>
         }
         return (
@@ -111,11 +141,13 @@ class CreateArticle extends Component {
                         <div className="form-group">
                             <label htmlFor="title">Título</label>
                             <input type="text" name="title" ref={this.titleRef} onChange={this.changeState}></input>
+                            {this.validator.message('title', this.state.article.title, 'required')}
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="content">Contenido</label>
-                            <textarea  name="content" ref={this.contentRef}  onChange={this.changeState}></textarea>
+                            <textarea name="content" ref={this.contentRef} onChange={this.changeState}></textarea>
+                            {this.validator.message('content', this.state.article.content, 'required')}
                         </div>
 
                         <div className="form-group">

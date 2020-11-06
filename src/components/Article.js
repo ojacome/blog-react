@@ -5,7 +5,8 @@ import Global from '../Global';
 import Moment from 'react-moment';
 import 'moment/locale/es';
 import ImageDefault from '../assets/images/no-img.png';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 class Article extends Component {
@@ -36,10 +37,45 @@ class Article extends Component {
         this.getArticle();
     }
 
+    deleteArticle = ( id ) => {
+
+        swal({
+            title: '¿Estás seguro de eliminar?',
+            text: 'No podrás recuperar la información del artículo',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,            
+        })
+        .then( (willDelete) => {
+
+            if(willDelete) {
+                Axios.delete( this.url + '/articles/article/' + id )
+                .then( resp => {
+
+                    swal(
+                        'Artículo eliminado',
+                        '',
+                        'success'
+                    )
+
+                    this.setState({
+                        article: resp.data.article,
+                        status: 'deleted'
+                    })
+                })
+            }
+        })        
+        
+    }
+
 
 
     render() {
         var article = this.state.article;
+
+        if( this.state.status === 'deleted' ){
+            return <Redirect to="/blog"></Redirect>
+        }
 
         return (
             <div className="center">
@@ -65,7 +101,11 @@ class Article extends Component {
                                 { article.content }
                             </p>
 
-                            <Link to="/blog" className="btn btn-danger">Eliminar</Link>
+                            <button onClick={
+                                () => {
+                                    this.deleteArticle(article._id)
+                                }
+                            } className="btn btn-danger">Eliminar</button>
                             <Link to="/blog" className="btn btn-warning">Editar</Link>
 
                             <div className="clearfix"></div>
