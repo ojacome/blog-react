@@ -11,13 +11,12 @@ class Home extends Component {
             <div id="home">
 
                 <Slider 
-                titulo="Bienvenido al Curso de React con Víctor Robles"
+                titulo="Bienvenido a mi blog con React js"
                 btn="Ir al blog"
                 />
 
                 <div className="center"> 
-                    <div id="content">
-                        <h1 className="subheader">Últimos artículos</h1>  
+                    <div id="content">                        
 
                         <Articles
                         home="true">

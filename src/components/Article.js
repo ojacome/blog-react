@@ -105,8 +105,12 @@ class Article extends Component {
                                 () => {
                                     this.deleteArticle(article._id)
                                 }
-                            } className="btn btn-danger">Eliminar</button>
-                            <Link to="/blog" className="btn btn-warning">Editar</Link>
+                            } 
+                            className="btn btn-danger">
+                                Eliminar
+                            </button>
+
+                            <Link to={'/blog/editar/'+ article._id } className="btn btn-warning">Editar</Link>
 
                             <div className="clearfix"></div>
                         </article>

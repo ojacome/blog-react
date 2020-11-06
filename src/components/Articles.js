@@ -70,7 +70,7 @@ class Articles extends Component {
                 articles: res.data.articles,
                 status: 'success'
             })
-            console.log(this.state);
+            // console.log(this.state);
         })
     }
 
